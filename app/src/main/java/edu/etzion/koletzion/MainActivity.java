@@ -3,6 +3,7 @@ package edu.etzion.koletzion;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,27 +17,29 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.threeten.bp.LocalDate;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import edu.etzion.koletzion.Fragments.MainViewPagerFragment;
 import edu.etzion.koletzion.Fragments.MoodFragment;
 import edu.etzion.koletzion.authentication.AuthenticationActivity;
+import edu.etzion.koletzion.on_back_pressed_listener.OnBackPressedListener;
 import edu.etzion.koletzion.player.ExoPlayerFragment;
 import edu.etzion.koletzion.player.StartLiveStreamTask;
+import edu.etzion.koletzion.push_notification.PushNotificationReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 	
 	private ArrayList<String> permissions = new ArrayList<>(
 			Arrays.asList(Manifest.permission.GET_ACCOUNTS,
-			Manifest.permission.READ_CONTACTS,
-			Manifest.permission.WAKE_LOCK,
-			Manifest.permission.READ_EXTERNAL_STORAGE));
+					Manifest.permission.READ_CONTACTS,
+					Manifest.permission.WAKE_LOCK,
+					Manifest.permission.READ_EXTERNAL_STORAGE));
 	private FirebaseAuth auth;
 	public ExoPlayerFragment playerFragment;
 	public FrameLayout frame;
@@ -55,13 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setSupportActionBar(toolbar);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
-			if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
-				permissions.add(Manifest.permission.FOREGROUND_SERVICE);
-			}
-			requestPermissions(permissions.toArray(new String[]{}), 0);
-		}
+
+
 //		moodPopUp();
+
 		main();
 		// Enable Notification Channel for Android OREO
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -73,6 +73,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		initBackendless();
 		
 		
+	}
+	
+	private void askForPermissionsIfNeeded() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+				permissions.add(Manifest.permission.FOREGROUND_SERVICE);
+			}
+			for (String permission : permissions) {
+				if (ContextCompat.checkSelfPermission(this, permission) !=
+						PackageManager.PERMISSION_GRANTED) {
+					ArrayList<String> strings = new ArrayList<>();
+					strings.add(permission);
+					requestPermissions(strings.
+							toArray(new String[]{}), 0);
+				}
+			}
+		}
 	}
 	
 	private void moodPopUp() {
@@ -114,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	
 	
 	private void main() {
+		askForPermissionsIfNeeded();
 		findViews();
 		startAuthenticationActivityIfNeeded();
 		initFragments();

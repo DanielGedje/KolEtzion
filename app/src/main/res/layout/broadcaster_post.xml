@@ -20,7 +20,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="header"
+
+            android:text="..טוען"
+
             android:textAlignment="viewStart"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline13"
@@ -37,8 +39,11 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ems="6"
-            android:text="duration"
-            android:textAlignment="textEnd"
+
+            android:text="..טוען"
+            android:textAlignment="viewStart"
+
+
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintEnd_toStartOf="@+id/guideline24"
             app:layout_constraintStart_toStartOf="@+id/guideline23"
@@ -60,7 +65,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
         <ImageView
-            android:id="@+id/ivComment"
+            android:id="@+id/ivCommenter"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -84,10 +89,23 @@
             android:text="לייקים"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline19"
-            app:layout_constraintEnd_toStartOf="@+id/guideline18"
+            app:layout_constraintEnd_toStartOf="@+id/guideline26"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="לייקים"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline19"
+            app:layout_constraintLeft_toRightOf="@+id/guideline3"
+            app:layout_constraintRight_toRightOf="@+id/guideline26"
+            app:layout_constraintTop_toTopOf="@+id/guideline12" />
         <TextView
             android:id="@+id/tvCommentsCount"
             android:layout_width="0dp"

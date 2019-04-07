@@ -22,10 +22,9 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import edu.etzion.koletzion.BaseBackPressedListener;
 import edu.etzion.koletzion.MainActivity;
 import edu.etzion.koletzion.R;
 import edu.etzion.koletzion.authentication.AuthenticationActivity;
@@ -33,6 +32,7 @@ import edu.etzion.koletzion.database.BitmapSerializer;
 import edu.etzion.koletzion.database.GetProfileByUserNameTask;
 import edu.etzion.koletzion.database.UpdateProfileTask;
 import edu.etzion.koletzion.models.Profile;
+import edu.etzion.koletzion.on_back_pressed_listener.BaseBackPressedListener;
 import edu.etzion.koletzion.player.VodDataSource;
 
 import static android.app.Activity.RESULT_OK;
@@ -77,10 +77,12 @@ public class PersonalAreaFragment extends Fragment {
 			view.findViewById(R.id.tvSignOut).setVisibility(View.GONE);
 			view.findViewById(R.id.tvSuggestContent).setVisibility(View.GONE);
 			view.findViewById(R.id.tvAbout).setVisibility(View.GONE);
+			view.findViewById(R.id.imagePersonalArea).setVisibility(View.GONE);
 		} else {
 			view.findViewById(R.id.tvSignOut).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.tvSuggestContent).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.tvAbout).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.imagePersonalArea).setVisibility(View.VISIBLE);
 			((MainActivity) getActivity()).setOnBackPressedListener(new BaseBackPressedListener(getActivity()));
 		}
 		
@@ -92,9 +94,7 @@ public class PersonalAreaFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		displayMyFeed();
-		imagePersonalArea.
-				setImageBitmap(BitmapSerializer.
-						decodeStringToBitmap(profile.getEncodedBitMapImage()));
+		
 	}
 	
 	private void displayMyFeed() {
@@ -113,11 +113,13 @@ public class PersonalAreaFragment extends Fragment {
 		setClickListeners();
 		if (getArguments() == null) return;
 		profile = getArguments().getParcelable("profile");
-		
+		imagePersonalArea.
+				setImageBitmap(BitmapSerializer.
+						decodeStringToBitmap(profile.getEncodedBitMapImage()));
 		view.findViewById(R.id.tvChangeImage).setOnClickListener((v -> {
 			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 			photoPickerIntent.setType("image/*");
-			startActivityForResult(photoPickerIntent, 1);
+			startActivityForResult(photoPickerIntent, 10);
 		}));
 	}
 	
@@ -151,7 +153,7 @@ public class PersonalAreaFragment extends Fragment {
 	public void onActivityResult(int reqCode, int resultCode, Intent data) {
 		super.onActivityResult(reqCode, resultCode, data);
 		
-		FragmentActivity activity = getActivity();
+		AppCompatActivity activity = (AppCompatActivity) getActivity();
 		
 		if (resultCode == RESULT_OK) {
 			try {
@@ -159,11 +161,14 @@ public class PersonalAreaFragment extends Fragment {
 				final InputStream imageStream = activity.getContentResolver().openInputStream(imageUri);
 				final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 				imagePersonalArea.setImageBitmap(selectedImage);
+				profile.setEncodedBitMapImage(BitmapSerializer.
+						encodeBitmapToString(BitmapSerializer.
+								getBitmapFromImageView(imagePersonalArea)));
 				new GetProfileByUserNameTask(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
 						p -> {
 							profile.setEncodedBitMapImage(BitmapSerializer.encodeBitmapToString(
-											BitmapSerializer.
-													getBitmapFromImageView(imagePersonalArea)));
+									BitmapSerializer.
+											getBitmapFromImageView(imagePersonalArea)));
 							new UpdateProfileTask(p).execute();
 						});
 			} catch (FileNotFoundException e) {

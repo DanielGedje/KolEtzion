@@ -1,4 +1,4 @@
-package edu.etzion.koletzion;
+package edu.etzion.koletzion.push_notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

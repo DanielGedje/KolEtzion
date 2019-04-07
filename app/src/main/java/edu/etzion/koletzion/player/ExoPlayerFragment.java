@@ -1,6 +1,7 @@
 package edu.etzion.koletzion.player;
 
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,6 +41,8 @@ public class ExoPlayerFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		//class level instances
 		playerView = view.findViewById(R.id.pvPlayer);
+//		playerView.setBackgroundColor(Color.WHITE);
+		playerView.setShutterBackgroundColor(getResources().getColor(R.color.playerColor));
 		//instantiate exoplayer
 		player = ExoPlayerFactory.newSimpleInstance(getContext());
 		

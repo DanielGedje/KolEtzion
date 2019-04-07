@@ -36,7 +36,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 		Profile p = comments.get(position).getProfile();
 		holder.tvCommentName.setText(p.getFirstName() + " " + p.getLastName());
 		holder.tvCommentContent.setText(comments.get(position).getContent());
-		holder.ivComment.setImageBitmap(BitmapSerializer.decodeStringToBitmap(
+		holder.ivCommenter.setImageBitmap(BitmapSerializer.decodeStringToBitmap(
 				comments.get(position).getProfile().getEncodedBitMapImage()
 		));
 	}
@@ -47,13 +47,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 	}
 	
 	class CommentViewHolder extends RecyclerView.ViewHolder {
-		ImageView ivComment;
+		ImageView ivCommenter;
 		TextView tvCommentName;
 		TextView tvCommentContent;
 		
 		public CommentViewHolder(@NonNull View itemView) {
 			super(itemView);
-			this.ivComment = itemView.findViewById(R.id.ivComment);
+			this.ivCommenter = itemView.findViewById(R.id.ivCommenter);
 			this.tvCommentName = itemView.findViewById(R.id.tvCommentName);
 			this.tvCommentContent = itemView.findViewById(R.id.tvCommentContent);
 		}

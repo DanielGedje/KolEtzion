@@ -1,4 +1,4 @@
-package edu.etzion.koletzion;
+package edu.etzion.koletzion.push_notification;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import com.backendless.push.BackendlessFCMService;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import edu.etzion.koletzion.MainActivity;
 
 public class PushNotificationService extends BackendlessFCMService {
 	@Override

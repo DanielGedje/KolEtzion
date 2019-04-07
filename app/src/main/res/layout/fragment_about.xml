@@ -35,7 +35,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="בית אקשטיין מקבוצת דנאל,
@@ -49,72 +48,60 @@
 אשר הוכח במספר רב של מחקרים כמודל אשר משפר באופן משמעותי את איכות החיים וההשתלבות החברתית של אנשים עם מוגבלות."
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="חזון
-בית אקשטיין הינו
-ארגון בינלאומי
-מוביל בהתפתחות
-אישית וחברתית"
-        app:layout_constraintBottom_toTopOf="@+id/guideline9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_height="100dp"
+        android:layout_marginRight="8dp"
+        android:text="חזון\n
+בית אקשטיין הינו\n
+ארגון בינלאומי\n
+מוביל בהתפתחות\n
+אישית וחברתית\n"
 
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 
     <TextView
         android:id="@+id/tvQuestion"
 
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="ערכים
-אנושיות ואהבת האדם
-אמונה באדם
-התמדה ונחישות
-יציבות כלכלית"
-        app:layout_constraintTop_toBottomOf="@id/editText"
-        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        android:lines="4"
+        android:text="ערכים\n
+אנושיות ואהבת האדם\n
+אמונה באדם\n
+התמדה ונחישות\n
+        יציבות כלכלית\n"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView9" />
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@id/editText" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="ייעוד
-שיפור איכות חיים
-,מתן תמיכה לאנשים
-עם מוגבלות והובלת
-שינוי עמדות בחברה"
-        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:text="ייעוד\n
+שיפור איכות חיים\n
+,מתן תמיכה לאנשים\n
+עם מוגבלות והובלת\n
+שינוי עמדות בחברה\n"
 
         app:layout_constraintEnd_toStartOf="@+id/tvQuestion"
-
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"

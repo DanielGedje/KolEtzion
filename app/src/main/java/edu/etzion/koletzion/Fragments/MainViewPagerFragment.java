@@ -35,7 +35,7 @@ public class MainViewPagerFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 		vpMain = view.findViewById(R.id.vpMain);
 		tabLayout = view.findViewById(R.id.tabLayout);
-
+		vpMain.setCurrentItem(0);
 
 	}
 	
@@ -47,7 +47,6 @@ public class MainViewPagerFragment extends Fragment {
 	
 	private void ViewPagerAdapterMainActivity() {
 		//this method includes the viewpager adapter that includes all the mainactivity fragments.
-		
 		// getting the current latest update profile object from the server
 		new ViewPagerTask(vpMain, getChildFragmentManager(),tabLayout).execute();
 		

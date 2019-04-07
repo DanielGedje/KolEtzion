@@ -348,7 +348,7 @@ public class rvFeedAdapter extends RecyclerView.Adapter<rvFeedAdapter.ViewHolder
 			tvCommentsCount = itemView.findViewById(R.id.tvCommentsCount);
 			tvListenersCount = itemView.findViewById(R.id.tvListenersCount);
 			ivLike = itemView.findViewById(R.id.ivLike);
-			ivComment = itemView.findViewById(R.id.ivComment);
+			ivComment = itemView.findViewById(R.id.ivCommenter);
 			ivFavorite = itemView.findViewById(R.id.ivSad);
 			etComment = itemView.findViewById(R.id.etComment);
 			

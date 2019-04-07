@@ -66,18 +66,23 @@ public class RegisterFragment extends Fragment implements Button.OnClickListener
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (!etRegisterConfirmPassword.getText().toString().equals(
-						etRegisterPassword.getText().toString())) {
-					match = false;
-				} else {
-					etRegisterPassword.setError("הסיסמאות לא תואמות");
-					match = true;
-				}
+			
 			}
+			
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-			
+				String password = etRegisterPassword.getText().toString().trim();
+				String confirmPassword = etRegisterConfirmPassword.getText().toString().trim();
+				if (password.matches(s.toString())) {
+					match = true;
+					etRegisterPassword.setError(null);
+					
+				} else {
+					match = false;
+					etRegisterPassword.setError("סיסמאות לא תואמות, נסה שנית");
+					etRegisterConfirmPassword.requestFocus();
+				}
 			}
 		});
 		super.onViewCreated(view, savedInstanceState);
@@ -98,10 +103,11 @@ public class RegisterFragment extends Fragment implements Button.OnClickListener
 	//button onclick
 	@Override
 	public void onClick(View v) {
-		String name = etRegisterName.getText().toString();
-		String lastName = etRegisterLastName.getText().toString();
-		String email = etRegisterEmail.getText().toString();
-		String password = etRegisterPassword.getText().toString();
+		String name = etRegisterName.getText().toString().trim();
+		String lastName = etRegisterLastName.getText().toString().trim();
+		String email = etRegisterEmail.getText().toString().trim();
+		String password = etRegisterPassword.getText().toString().trim();
+		String confirmPassword = etRegisterConfirmPassword.getText().toString().trim();
 		if (name.length() <= 1) {
 			etRegisterName.setError("שם קצר מדי");
 			etRegisterName.requestFocus();
@@ -114,11 +120,8 @@ public class RegisterFragment extends Fragment implements Button.OnClickListener
 		} else if (password.length() < 6) {
 			etRegisterPassword.setError("על הסיסמא להיות לפחות 6 אותיות או ספרות");
 			etRegisterPassword.requestFocus();
-		} else if (!etRegisterPassword.getText().toString().
-				equals(etRegisterConfirmPassword.getText().toString())) {
+		} else if (!password.equals(confirmPassword)) {
 			match = false;
-			etRegisterConfirmPassword.setError("סיסמאות לא תואמות, נסה שנית");
-			etRegisterConfirmPassword.requestFocus();
 		} else {
 			match = true;
 			createUser(email, name, lastName, password);
